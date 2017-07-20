@@ -170,7 +170,6 @@ func resourceConsulAclRead(d *schema.ResourceData, meta interface{}) error {
 		return nil
 	}
 
-	}
 	d.Set("id", aclEntry.ID)
 	d.Set("name", aclEntry.Name)
 	d.Set("type", aclEntry.Type)
