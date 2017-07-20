@@ -1,4 +1,3 @@
-
 // Implementation of dataSourceConsulCatalogServices is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -29,7 +28,7 @@ func dataSourceConsulCatalogServices() *schema.Resource {
 		Read: dataSourceConsulCatalogServicesRead,
 		Schema: map[string]*schema.Schema{
 			// Data Source Predicate(s)
-			catalogServicesDatacenter: &schema.Schema{
+			catalogServicesDatacenter: {
 				// Used in the query, must be stored and force a refresh if the value
 				// changes.
 				Computed: true,
@@ -39,17 +38,17 @@ func dataSourceConsulCatalogServices() *schema.Resource {
 			catalogNodesQueryOpts: schemaQueryOpts,
 
 			// Out parameters
-			catalogServicesNames: &schema.Schema{
+			catalogServicesNames: {
 				Type:     schema.TypeList,
 				Computed: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
-			catalogServicesServices: &schema.Schema{
+			catalogServicesServices: {
 				Computed: true,
 				Type:     schema.TypeMap,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						catalogServiceServiceTags: &schema.Schema{
+						catalogServiceServiceTags: {
 							Type:     schema.TypeList,
 							Computed: true,
 							Elem:     &schema.Schema{Type: schema.TypeString},
@@ -62,11 +61,11 @@ func dataSourceConsulCatalogServices() *schema.Resource {
 }
 
 func dataSourceConsulCatalogServicesRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 
 	// Parse out data source filters to populate Consul's query options
 	queryOpts, err := getQueryOpts(d, client)

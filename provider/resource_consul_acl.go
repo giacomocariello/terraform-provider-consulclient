@@ -17,68 +17,68 @@ func resourceConsulAcl() *schema.Resource {
 		SchemaVersion: 1,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-			"datacenter": &schema.Schema{
+			"datacenter": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"token": &schema.Schema{
+			"token": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"id": &schema.Schema{
+			"id": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"type": &schema.Schema{
+			"type": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"rules": &schema.Schema{
+			"rules": {
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
@@ -87,11 +87,11 @@ func resourceConsulAcl() *schema.Resource {
 }
 
 func resourceConsulAclCreate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	acl := client.ACL()
 	dc, err := getDC(d, client)
 	if err != nil {
@@ -105,12 +105,12 @@ func resourceConsulAclCreate(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 
-        aclEntry := &consulapi.ACLEntry{
-		ID:	d.Get("id").(string),
-		Name:	d.Get("name").(string),
-		Type:	d.Get("type").(string),
-		Rules:  string(ruleBytes),
-        }
+	aclEntry := &consulapi.ACLEntry{
+		ID:    d.Get("id").(string),
+		Name:  d.Get("name").(string),
+		Type:  d.Get("type").(string),
+		Rules: string(ruleBytes),
+	}
 
 	err = aclClient.Create(aclEntry)
 	if err != nil {
@@ -123,11 +123,11 @@ func resourceConsulAclCreate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulAclUpdate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	acl := client.ACL()
 	dc, err := getDC(d, client)
 	if err != nil {
@@ -141,12 +141,12 @@ func resourceConsulAclUpdate(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 
-        aclEntry := &consulapi.ACLEntry{
-		ID:	d.Get("id").(string),
-		Name:	d.Get("name").(string),
-		Type:	d.Get("type").(string),
-		Rules:  string(ruleBytes),
-        }
+	aclEntry := &consulapi.ACLEntry{
+		ID:    d.Get("id").(string),
+		Name:  d.Get("name").(string),
+		Type:  d.Get("type").(string),
+		Rules: string(ruleBytes),
+	}
 
 	err = aclClient.Update(aclEntry)
 	if err != nil {
@@ -157,11 +157,11 @@ func resourceConsulAclUpdate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulAclRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	acl := client.ACL()
 
 	dc, err := getDC(d, client)
@@ -194,11 +194,11 @@ func resourceConsulAclRead(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulAclDelete(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	acl := client.ACL()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)

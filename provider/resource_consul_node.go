@@ -1,4 +1,3 @@
-
 // Implementation of resourceConsulNode is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -19,58 +18,58 @@ func resourceConsulNode() *schema.Resource {
 		Delete: resourceConsulNodeDelete,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                                ForceNew: true,
-                        },
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                                ForceNew: true,
-                        },
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-			"address": &schema.Schema{
+			"address": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
 
-			"datacenter": &schema.Schema{
+			"datacenter": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
 
-			"token": &schema.Schema{
+			"token": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
@@ -79,11 +78,11 @@ func resourceConsulNode() *schema.Resource {
 }
 
 func resourceConsulNodeCreate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	catalog := client.Catalog()
 
 	var dc string
@@ -133,11 +132,11 @@ func resourceConsulNodeCreate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulNodeRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	catalog := client.Catalog()
 
 	// Get the DC, error if not available.
@@ -159,11 +158,11 @@ func resourceConsulNodeRead(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulNodeDelete(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	catalog := client.Catalog()
 
 	var dc string

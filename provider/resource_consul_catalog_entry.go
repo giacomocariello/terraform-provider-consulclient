@@ -1,4 +1,3 @@
-
 // Implementation of resourceConsulCatalogEntry is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -23,87 +22,87 @@ func resourceConsulCatalogEntry() *schema.Resource {
 		Delete: resourceConsulCatalogEntryDelete,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-			"address": &schema.Schema{
+			"address": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
 
-			"datacenter": &schema.Schema{
+			"datacenter": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"node": &schema.Schema{
+			"node": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
 
-			"service": &schema.Schema{
+			"service": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				ForceNew: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"address": &schema.Schema{
+						"address": {
 							Type:     schema.TypeString,
 							Optional: true,
 							ForceNew: true,
 						},
 
-						"id": &schema.Schema{
+						"id": {
 							Type:     schema.TypeString,
 							Optional: true,
 							Computed: true,
 							ForceNew: true,
 						},
 
-						"name": &schema.Schema{
+						"name": {
 							Type:     schema.TypeString,
 							Required: true,
 							ForceNew: true,
 						},
 
-						"port": &schema.Schema{
+						"port": {
 							Type:     schema.TypeInt,
 							Optional: true,
 							ForceNew: true,
 						},
 
-						"tags": &schema.Schema{
+						"tags": {
 							Type:     schema.TypeSet,
 							Optional: true,
 							ForceNew: true,
@@ -115,7 +114,7 @@ func resourceConsulCatalogEntry() *schema.Resource {
 				Set: resourceConsulCatalogEntryServicesHash,
 			},
 
-			"token": &schema.Schema{
+			"token": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
@@ -150,11 +149,11 @@ func resourceConsulCatalogEntryServicesHash(v interface{}) int {
 }
 
 func resourceConsulCatalogEntryCreate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	catalog := client.Catalog()
 
 	var dc string
@@ -248,11 +247,11 @@ func resourceConsulCatalogEntryCreate(d *schema.ResourceData, meta interface{}) 
 }
 
 func resourceConsulCatalogEntryRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	catalog := client.Catalog()
 
 	// Get the DC, error if not available.
@@ -274,11 +273,11 @@ func resourceConsulCatalogEntryRead(d *schema.ResourceData, meta interface{}) er
 }
 
 func resourceConsulCatalogEntryDelete(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	catalog := client.Catalog()
 
 	var dc string

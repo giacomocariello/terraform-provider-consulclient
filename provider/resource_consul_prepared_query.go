@@ -1,4 +1,3 @@
-
 // Implementation of resourceConsulPreparedQuery is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -21,100 +20,100 @@ func resourceConsulPreparedQuery() *schema.Resource {
 		SchemaVersion: 0,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                                ForceNew: true,
-                        },
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                                ForceNew: true,
-                        },
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-			"id": &schema.Schema{
+			"id": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
 
-			"datacenter": &schema.Schema{
+			"datacenter": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
 
-			"session": &schema.Schema{
+			"session": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"token": &schema.Schema{
+			"token": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"stored_token": &schema.Schema{
+			"stored_token": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"service": &schema.Schema{
+			"service": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
 
-			"tags": &schema.Schema{
+			"tags": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 
-			"near": &schema.Schema{
+			"near": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"only_passing": &schema.Schema{
+			"only_passing": {
 				Type:     schema.TypeBool,
 				Optional: true,
 			},
 
-			"failover": &schema.Schema{
+			"failover": {
 				Type:     schema.TypeList,
 				Optional: true,
 				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"nearest_n": &schema.Schema{
+						"nearest_n": {
 							Type:     schema.TypeInt,
 							Optional: true,
 						},
-						"datacenters": &schema.Schema{
+						"datacenters": {
 							Type:     schema.TypeList,
 							Optional: true,
 							Elem:     &schema.Schema{Type: schema.TypeString},
@@ -123,13 +122,13 @@ func resourceConsulPreparedQuery() *schema.Resource {
 				},
 			},
 
-			"dns": &schema.Schema{
+			"dns": {
 				Type:     schema.TypeList,
 				Optional: true,
 				MaxItems: 1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"ttl": &schema.Schema{
+						"ttl": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
@@ -137,17 +136,17 @@ func resourceConsulPreparedQuery() *schema.Resource {
 				},
 			},
 
-			"template": &schema.Schema{
+			"template": {
 				Type:     schema.TypeList,
 				MaxItems: 1,
 				Optional: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"type": &schema.Schema{
+						"type": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
-						"regexp": &schema.Schema{
+						"regexp": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
@@ -159,11 +158,11 @@ func resourceConsulPreparedQuery() *schema.Resource {
 }
 
 func resourceConsulPreparedQueryCreate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	wo := &consulapi.WriteOptions{
 		Datacenter: d.Get("datacenter").(string),
 		Token:      d.Get("token").(string),
@@ -181,11 +180,11 @@ func resourceConsulPreparedQueryCreate(d *schema.ResourceData, meta interface{})
 }
 
 func resourceConsulPreparedQueryUpdate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	wo := &consulapi.WriteOptions{
 		Datacenter: d.Get("datacenter").(string),
 		Token:      d.Get("token").(string),
@@ -201,11 +200,11 @@ func resourceConsulPreparedQueryUpdate(d *schema.ResourceData, meta interface{})
 }
 
 func resourceConsulPreparedQueryRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	qo := &consulapi.QueryOptions{
 		Datacenter: d.Get("datacenter").(string),
 		Token:      d.Get("token").(string),
@@ -255,11 +254,11 @@ func resourceConsulPreparedQueryRead(d *schema.ResourceData, meta interface{}) e
 }
 
 func resourceConsulPreparedQueryDelete(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	writeOpts := &consulapi.WriteOptions{
 		Datacenter: d.Get("datacenter").(string),
 		Token:      d.Get("token").(string),

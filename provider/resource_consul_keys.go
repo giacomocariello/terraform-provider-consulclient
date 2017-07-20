@@ -19,78 +19,78 @@ func resourceConsulKeys() *schema.Resource {
 		MigrateState:  resourceConsulKeysMigrateState,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-			"datacenter": &schema.Schema{
+			"datacenter": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"token": &schema.Schema{
+			"token": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"key": &schema.Schema{
+			"key": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"name": &schema.Schema{
+						"name": {
 							Type:       schema.TypeString,
 							Optional:   true,
 							Deprecated: "Using consul_keys resource to *read* is deprecated; please use consul_keys data source instead",
 						},
 
-						"path": &schema.Schema{
+						"path": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
 
-						"value": &schema.Schema{
+						"value": {
 							Type:     schema.TypeString,
 							Optional: true,
 							Computed: true,
 						},
 
-						"default": &schema.Schema{
+						"default": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
 
-						"delete": &schema.Schema{
+						"delete": {
 							Type:     schema.TypeBool,
 							Optional: true,
 							Default:  false,
@@ -99,7 +99,7 @@ func resourceConsulKeys() *schema.Resource {
 				},
 			},
 
-			"var": &schema.Schema{
+			"var": {
 				Type:     schema.TypeMap,
 				Computed: true,
 			},
@@ -108,11 +108,11 @@ func resourceConsulKeys() *schema.Resource {
 }
 
 func resourceConsulKeysCreate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)
@@ -148,11 +148,11 @@ func resourceConsulKeysCreate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulKeysUpdate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)
@@ -236,11 +236,11 @@ func resourceConsulKeysUpdate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulKeysRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)
@@ -299,11 +299,11 @@ func resourceConsulKeysRead(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulKeysDelete(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)

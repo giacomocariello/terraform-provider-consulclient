@@ -1,4 +1,3 @@
-
 // Implementation of ProviderConfig is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -10,8 +9,8 @@ import (
 	"strings"
 
 	consulapi "github.com/hashicorp/consul/api"
-        "github.com/hashicorp/terraform/helper/schema"
-        "github.com/mitchellh/mapstructure"
+	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/mitchellh/mapstructure"
 )
 
 type ProviderConfig struct {
@@ -26,60 +25,60 @@ type ProviderConfig struct {
 }
 
 func (c *ProviderConfig) GetResolvedConfig(d *schema.ResourceData) (*ProviderConfig, bool, error) {
-        var r, n ProviderConfig
-        configRaw := d.Get("").(map[string]interface{})
-        if err := mapstructure.Decode(configRaw, &n); err != nil {
-                return nil, false, err
-        }
-        switch {
-        case n.Datacenter != "":
-            r.Datacenter = n.Datacenter
-        case c.Datacenter != "":
-            r.Datacenter = c.Datacenter
-        }
-        switch {
-        case n.Host != "":
-            r.Host = n.Host
-        case c.Host != "":
-            r.Host = c.Host
-        }
-        switch {
-        case n.Scheme != "":
-            r.Scheme = n.Scheme
-        case c.Scheme != "":
-            r.Scheme = c.Scheme
-        }
-        switch {
-        case n.HttpAuth != "":
-            r.HttpAuth = n.HttpAuth
-        case c.HttpAuth != "":
-            r.HttpAuth = c.HttpAuth
-        }
-        switch {
-        case n.Token != "":
-            r.Token = n.Token
-        case c.Token != "":
-            r.Token = c.Token
-        }
-        switch {
-        case n.CAFile != "":
-            r.CAFile = n.CAFile
-        case c.CAFile != "":
-            r.CAFile = c.CAFile
-        }
-        switch {
-        case n.CertFile != "":
-            r.CertFile = n.CertFile
-        case c.CertFile != "":
-            r.CertFile = c.CertFile
-        }
-        switch {
-        case n.KeyFile != "":
-            r.KeyFile = n.KeyFile
-        case c.KeyFile != "":
-            r.KeyFile = c.KeyFile
-        }
-        return &r, false, nil
+	var r, n ProviderConfig
+	configRaw := d.Get("").(map[string]interface{})
+	if err := mapstructure.Decode(configRaw, &n); err != nil {
+		return nil, false, err
+	}
+	switch {
+	case n.Datacenter != "":
+		r.Datacenter = n.Datacenter
+	case c.Datacenter != "":
+		r.Datacenter = c.Datacenter
+	}
+	switch {
+	case n.Host != "":
+		r.Host = n.Host
+	case c.Host != "":
+		r.Host = c.Host
+	}
+	switch {
+	case n.Scheme != "":
+		r.Scheme = n.Scheme
+	case c.Scheme != "":
+		r.Scheme = c.Scheme
+	}
+	switch {
+	case n.HttpAuth != "":
+		r.HttpAuth = n.HttpAuth
+	case c.HttpAuth != "":
+		r.HttpAuth = c.HttpAuth
+	}
+	switch {
+	case n.Token != "":
+		r.Token = n.Token
+	case c.Token != "":
+		r.Token = c.Token
+	}
+	switch {
+	case n.CAFile != "":
+		r.CAFile = n.CAFile
+	case c.CAFile != "":
+		r.CAFile = c.CAFile
+	}
+	switch {
+	case n.CertFile != "":
+		r.CertFile = n.CertFile
+	case c.CertFile != "":
+		r.CertFile = c.CertFile
+	}
+	switch {
+	case n.KeyFile != "":
+		r.KeyFile = n.KeyFile
+	case c.KeyFile != "":
+		r.KeyFile = c.KeyFile
+	}
+	return &r, false, nil
 }
 
 // NewClient() returns a new client for accessing consul.

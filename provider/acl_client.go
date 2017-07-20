@@ -1,4 +1,3 @@
-
 // Implementation of aclClient is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -50,8 +49,8 @@ func (c *aclClient) Create(acl *consulapi.ACLEntry) error {
 	if id, _, err := c.client.Create(acl, c.wOpts); err != nil {
 		return fmt.Errorf("Failed to write Consul ACL '%s': %s", acl.Name, err)
 	} else {
-                acl.ID = id
-        }
+		acl.ID = id
+	}
 	return nil
 }
 
@@ -73,6 +72,6 @@ func (c *aclClient) Update(acl *consulapi.ACLEntry) error {
 	)
 	if _, err := c.client.Update(acl, c.wOpts); err != nil {
 		return fmt.Errorf("Failed to write Consul ACL '%s': %s", acl.Name, err)
-        }
+	}
 	return nil
 }

@@ -1,4 +1,3 @@
-
 // Implementation of dataSourceConsulCatalogService is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -39,129 +38,129 @@ func dataSourceConsulCatalogService() *schema.Resource {
 	return &schema.Resource{
 		Read: dataSourceConsulCatalogServiceRead,
 		Schema: map[string]*schema.Schema{
-                        "address": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"address": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "token": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"token": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
 			// Data Source Predicate(s)
-			catalogServiceDatacenter: &schema.Schema{
+			catalogServiceDatacenter: {
 				// Used in the query, must be stored and force a refresh if the value
 				// changes.
 				Computed: true,
 				Type:     schema.TypeString,
 				ForceNew: true,
 			},
-			catalogServiceTag: &schema.Schema{
+			catalogServiceTag: {
 				// Used in the query, must be stored and force a refresh if the value
 				// changes.
 				Computed: true,
 				Type:     schema.TypeString,
 				ForceNew: true,
 			},
-			catalogServiceName: &schema.Schema{
+			catalogServiceName: {
 				Required: true,
 				Type:     schema.TypeString,
 			},
 			catalogNodesQueryOpts: schemaQueryOpts,
 
 			// Out parameters
-			catalogServiceElem: &schema.Schema{
+			catalogServiceElem: {
 				Computed: true,
 				Type:     schema.TypeList,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						catalogServiceCreateIndex: &schema.Schema{
+						catalogServiceCreateIndex: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceNodeAddress: &schema.Schema{
+						catalogServiceNodeAddress: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceNodeID: &schema.Schema{
+						catalogServiceNodeID: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceModifyIndex: &schema.Schema{
+						catalogServiceModifyIndex: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceNodeName: &schema.Schema{
+						catalogServiceNodeName: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceNodeMeta: &schema.Schema{
+						catalogServiceNodeMeta: {
 							Type:     schema.TypeMap,
 							Computed: true,
 						},
-						catalogServiceServiceAddress: &schema.Schema{
+						catalogServiceServiceAddress: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceServiceEnableTagOverride: &schema.Schema{
+						catalogServiceServiceEnableTagOverride: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceServiceID: &schema.Schema{
+						catalogServiceServiceID: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceServiceName: &schema.Schema{
+						catalogServiceServiceName: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceServicePort: &schema.Schema{
+						catalogServiceServicePort: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogServiceServiceTags: &schema.Schema{
+						catalogServiceServiceTags: {
 							Type:     schema.TypeList,
 							Computed: true,
 							Elem:     &schema.Schema{Type: schema.TypeString},
 						},
-						catalogServiceTaggedAddresses: &schema.Schema{
+						catalogServiceTaggedAddresses: {
 							Type:     schema.TypeMap,
 							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									catalogNodesSchemaTaggedLAN: &schema.Schema{
+									catalogNodesSchemaTaggedLAN: {
 										Type:     schema.TypeString,
 										Computed: true,
 									},
-									catalogNodesSchemaTaggedWAN: &schema.Schema{
+									catalogNodesSchemaTaggedWAN: {
 										Type:     schema.TypeString,
 										Computed: true,
 									},
@@ -176,11 +175,11 @@ func dataSourceConsulCatalogService() *schema.Resource {
 }
 
 func dataSourceConsulCatalogServiceRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 
 	// Parse out data source filters to populate Consul's query options
 	queryOpts, err := getQueryOpts(d, client)

@@ -1,4 +1,3 @@
-
 // Implementation of dataSourceConsulKeys is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -13,66 +12,66 @@ func dataSourceConsulKeys() *schema.Resource {
 		Read: dataSourceConsulKeysRead,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
 				ForceNew: true,
-                        },
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-			"datacenter": &schema.Schema{
+			"datacenter": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"token": &schema.Schema{
+			"token": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"key": &schema.Schema{
+			"key": {
 				Type:     schema.TypeSet,
 				Optional: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"name": &schema.Schema{
+						"name": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
 
-						"path": &schema.Schema{
+						"path": {
 							Type:     schema.TypeString,
 							Required: true,
 						},
 
-						"default": &schema.Schema{
+						"default": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
@@ -80,7 +79,7 @@ func dataSourceConsulKeys() *schema.Resource {
 				},
 			},
 
-			"var": &schema.Schema{
+			"var": {
 				Type:     schema.TypeMap,
 				Computed: true,
 			},
@@ -89,11 +88,11 @@ func dataSourceConsulKeys() *schema.Resource {
 }
 
 func dataSourceConsulKeysRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)

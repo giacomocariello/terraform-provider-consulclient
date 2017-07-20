@@ -1,4 +1,3 @@
-
 // Implementation of resourceConsulService is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -19,69 +18,69 @@ func resourceConsulService() *schema.Resource {
 		Delete: resourceConsulServiceDelete,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                                ForceNew: true,
-                        },
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                                ForceNew: true,
-                        },
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "token": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"token": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-			"address": &schema.Schema{
+			"address": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"service_id": &schema.Schema{
+			"service_id": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
 				ForceNew: true,
 			},
 
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
 
-			"port": &schema.Schema{
+			"port": {
 				Type:     schema.TypeInt,
 				Optional: true,
 				ForceNew: true,
 			},
 
-			"tags": &schema.Schema{
+			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
@@ -92,11 +91,11 @@ func resourceConsulService() *schema.Resource {
 }
 
 func resourceConsulServiceCreate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	agent := client.Agent()
 
 	name := d.Get("name").(string)
@@ -152,11 +151,11 @@ func resourceConsulServiceCreate(d *schema.ResourceData, meta interface{}) error
 }
 
 func resourceConsulServiceRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	agent := client.Agent()
 
 	name := d.Get("name").(string)
@@ -188,11 +187,11 @@ func resourceConsulServiceRead(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceConsulServiceDelete(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	catalog := client.Agent()
 
 	id := d.Get("service_id").(string)

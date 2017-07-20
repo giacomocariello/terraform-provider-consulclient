@@ -1,4 +1,3 @@
-
 // Implementation of dataSourceConsulAgentSelf is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -173,40 +172,40 @@ func dataSourceConsulAgentSelf() *schema.Resource {
 	return &schema.Resource{
 		Read: dataSourceConsulAgentSelfRead,
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "token": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"token": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			agentSelfACLDatacenter: {
 				Computed: true,
 				Type:     schema.TypeString,
@@ -772,7 +771,7 @@ func dataSourceConsulAgentSelf() *schema.Resource {
 
 func dataSourceConsulAgentSelfRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
+	client, err := config.NewClient()
 	if err != nil {
 		return err
 	}

@@ -1,4 +1,3 @@
-
 // Implementation of resourceConsulKeyPrefix is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -18,57 +17,57 @@ func resourceConsulKeyPrefix() *schema.Resource {
 		Delete: resourceConsulKeyPrefixDelete,
 
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-				ForceNew: true,
-                        },
-
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-				ForceNew: true,
-                        },
-
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
-
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
-
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
-
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
-
-			"datacenter": &schema.Schema{
+			"host": {
 				Type:     schema.TypeString,
 				Optional: true,
-                                Computed: true,
 				ForceNew: true,
 			},
 
-			"token": &schema.Schema{
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
+				ForceNew: true,
+			},
+
+			"http_auth": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"path_prefix": &schema.Schema{
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+
+			"datacenter": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+				ForceNew: true,
+			},
+
+			"token": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+
+			"path_prefix": {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
 
-			"subkeys": &schema.Schema{
+			"subkeys": {
 				Type:     schema.TypeMap,
 				Required: true,
 				Elem: &schema.Schema{
@@ -80,11 +79,11 @@ func resourceConsulKeyPrefix() *schema.Resource {
 }
 
 func resourceConsulKeyPrefixCreate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)
@@ -142,11 +141,11 @@ func resourceConsulKeyPrefixCreate(d *schema.ResourceData, meta interface{}) err
 }
 
 func resourceConsulKeyPrefixUpdate(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)
@@ -191,7 +190,7 @@ func resourceConsulKeyPrefixUpdate(d *schema.ResourceData, meta interface{}) err
 		}
 
 		// Remove deleted keys
-		for k, _ := range om {
+		for k := range om {
 			if _, exists := nm[k]; exists {
 				continue
 			}
@@ -212,11 +211,11 @@ func resourceConsulKeyPrefixUpdate(d *schema.ResourceData, meta interface{}) err
 }
 
 func resourceConsulKeyPrefixRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)
@@ -243,11 +242,11 @@ func resourceConsulKeyPrefixRead(d *schema.ResourceData, meta interface{}) error
 }
 
 func resourceConsulKeyPrefixDelete(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 	kv := client.KV()
 	token := d.Get("token").(string)
 	dc, err := getDC(d, client)

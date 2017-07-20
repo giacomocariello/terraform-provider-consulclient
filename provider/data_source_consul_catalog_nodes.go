@@ -1,4 +1,3 @@
-
 // Implementation of dataSourceConsulCatalogNodes is derived from github.com/terraform-providers/terraform-provider-consul.
 // See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
 
@@ -35,90 +34,90 @@ func dataSourceConsulCatalogNodes() *schema.Resource {
 	return &schema.Resource{
 		Read: dataSourceConsulCatalogNodesRead,
 		Schema: map[string]*schema.Schema{
-                        "host": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"host": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "scheme": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"scheme": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "http_auth": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"http_auth": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "ca_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"ca_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "cert_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"cert_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "key_file": &schema.Schema{
-                                Type:        schema.TypeString,
-                                Optional:    true,
-                        },
+			"key_file": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
-                        "token": &schema.Schema{
-                                Type:     schema.TypeString,
-                                Optional: true,
-                        },
+			"token": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 
 			// Filters
 			catalogNodesQueryOpts: schemaQueryOpts,
 
 			// Out parameters
-			catalogNodesDatacenter: &schema.Schema{
+			catalogNodesDatacenter: {
 				Computed: true,
 				Type:     schema.TypeString,
 			},
-			catalogNodesNodeIDs: &schema.Schema{
+			catalogNodesNodeIDs: {
 				Computed: true,
 				Type:     schema.TypeList,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
-			catalogNodesNodeNames: &schema.Schema{
+			catalogNodesNodeNames: {
 				Computed: true,
 				Type:     schema.TypeList,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
-			catalogNodesElem: &schema.Schema{
+			catalogNodesElem: {
 				Computed: true,
 				Type:     schema.TypeList,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						catalogNodesNodeID: &schema.Schema{
+						catalogNodesNodeID: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogNodesNodeName: &schema.Schema{
+						catalogNodesNodeName: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogNodesNodeAddress: &schema.Schema{
+						catalogNodesNodeAddress: {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
-						catalogNodesNodeMeta: &schema.Schema{
+						catalogNodesNodeMeta: {
 							Type:     schema.TypeMap,
 							Computed: true,
 						},
-						catalogNodesNodeTaggedAddresses: &schema.Schema{
+						catalogNodesNodeTaggedAddresses: {
 							Type:     schema.TypeMap,
 							Computed: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									catalogNodesSchemaTaggedLAN: &schema.Schema{
+									catalogNodesSchemaTaggedLAN: {
 										Type:     schema.TypeString,
 										Computed: true,
 									},
-									catalogNodesSchemaTaggedWAN: &schema.Schema{
+									catalogNodesSchemaTaggedWAN: {
 										Type:     schema.TypeString,
 										Computed: true,
 									},
@@ -133,11 +132,11 @@ func dataSourceConsulCatalogNodes() *schema.Resource {
 }
 
 func dataSourceConsulCatalogNodesRead(d *schema.ResourceData, meta interface{}) error {
-        config := meta.(*ProviderConfig)
-        client, err := config.NewClient()
-        if err != nil {
-                return err
-        }
+	config := meta.(*ProviderConfig)
+	client, err := config.NewClient()
+	if err != nil {
+		return err
+	}
 
 	// Parse out data source filters to populate Consul's query options
 	queryOpts, err := getQueryOpts(d, client)
