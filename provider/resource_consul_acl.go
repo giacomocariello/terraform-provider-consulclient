@@ -109,7 +109,11 @@ func resourceConsulAclCreate(d *schema.ResourceData, meta interface{}) error {
 		Rules: d.Get("rules").(string),
 	}
 
-	err = aclClient.Create(aclEntry)
+        if aclEntry.ID == "" {
+	    err = aclClient.Create(aclEntry)
+        } else {
+	    err = aclClient.Update(aclEntry)
+        }
 	if err != nil {
 		return err
 	}
