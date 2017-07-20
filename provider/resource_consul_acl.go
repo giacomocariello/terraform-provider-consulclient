@@ -59,7 +59,7 @@ func resourceConsulAcl() *schema.Resource {
 				Optional: true,
 			},
 
-			"id": {
+			"key": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
@@ -103,7 +103,7 @@ func resourceConsulAclCreate(d *schema.ResourceData, meta interface{}) error {
 	aclClient := newACLClient(acl, dc, config.Token)
 
 	aclEntry := &consulapi.ACLEntry{
-		ID:    d.Get("id").(string),
+		ID:    d.Get("key").(string),
 		Name:  d.Get("name").(string),
 		Type:  d.Get("type").(string),
 		Rules: d.Get("rules").(string),
@@ -142,7 +142,7 @@ func resourceConsulAclUpdate(d *schema.ResourceData, meta interface{}) error {
 	aclClient := newACLClient(acl, dc, config.Token)
 
 	aclEntry := &consulapi.ACLEntry{
-		ID:    d.Get("id").(string),
+		ID:    d.Get("key").(string),
 		Name:  d.Get("name").(string),
 		Type:  d.Get("type").(string),
 		Rules: d.Get("rules").(string),
@@ -184,7 +184,7 @@ func resourceConsulAclRead(d *schema.ResourceData, meta interface{}) error {
 		return nil
 	}
 
-	d.Set("id", aclEntry.ID)
+	d.Set("key", aclEntry.ID)
 	d.Set("name", aclEntry.Name)
 	d.Set("type", aclEntry.Type)
 	d.Set("rules", aclEntry.Rules)
