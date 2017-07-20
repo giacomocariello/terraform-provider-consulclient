@@ -1,0 +1,7 @@
+build:
+  binary: terraform-provider-consulclient
+  goos:
+    - darwin
+    - linux
+  goarch:
+    - amd64
