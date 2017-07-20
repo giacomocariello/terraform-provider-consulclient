@@ -79,7 +79,7 @@ func resourceConsulAcl() *schema.Resource {
 			},
 
 			"rules": {
-				Type:     schema.TypeMap,
+				Type:     schema.TypeString,
 				Optional: true,
 			},
 		},
@@ -100,16 +100,11 @@ func resourceConsulAclCreate(d *schema.ResourceData, meta interface{}) error {
 
 	aclClient := newACLClient(acl, dc, config.Token)
 
-	ruleBytes, err := json.Marshal(d.Get("rules").(map[string]interface{}))
-	if err != nil {
-		return err
-	}
-
 	aclEntry := &consulapi.ACLEntry{
 		ID:    d.Get("id").(string),
 		Name:  d.Get("name").(string),
 		Type:  d.Get("type").(string),
-		Rules: string(ruleBytes),
+		Rules: d.Get("rules").(string),
 	}
 
 	err = aclClient.Create(aclEntry)
@@ -136,16 +131,11 @@ func resourceConsulAclUpdate(d *schema.ResourceData, meta interface{}) error {
 
 	aclClient := newACLClient(acl, dc, config.Token)
 
-	ruleBytes, err := json.Marshal(d.Get("rules").(map[string]interface{}))
-	if err != nil {
-		return err
-	}
-
 	aclEntry := &consulapi.ACLEntry{
 		ID:    d.Get("id").(string),
 		Name:  d.Get("name").(string),
 		Type:  d.Get("type").(string),
-		Rules: string(ruleBytes),
+		Rules: d.Get("rules").(string),
 	}
 
 	err = aclClient.Update(aclEntry)
@@ -180,14 +170,11 @@ func resourceConsulAclRead(d *schema.ResourceData, meta interface{}) error {
 		return nil
 	}
 
-	rules := make(map[string]interface{})
-	if err = json.Unmarshal([]byte(aclEntry.Rules), rules); err != nil {
-		return err
 	}
 	d.Set("id", aclEntry.ID)
 	d.Set("name", aclEntry.Name)
 	d.Set("type", aclEntry.Type)
-	d.Set("rules", rules)
+	d.Set("rules", aclEntry.Rules)
 	d.Set("datacenter", dc)
 
 	return nil
