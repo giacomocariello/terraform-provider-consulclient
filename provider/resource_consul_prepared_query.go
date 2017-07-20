@@ -159,7 +159,11 @@ func resourceConsulPreparedQuery() *schema.Resource {
 
 func resourceConsulPreparedQueryCreate(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -181,7 +185,11 @@ func resourceConsulPreparedQueryCreate(d *schema.ResourceData, meta interface{})
 
 func resourceConsulPreparedQueryUpdate(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -201,7 +209,11 @@ func resourceConsulPreparedQueryUpdate(d *schema.ResourceData, meta interface{})
 
 func resourceConsulPreparedQueryRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -255,7 +267,11 @@ func resourceConsulPreparedQueryRead(d *schema.ResourceData, meta interface{}) e
 
 func resourceConsulPreparedQueryDelete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}

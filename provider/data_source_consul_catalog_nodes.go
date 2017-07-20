@@ -133,7 +133,11 @@ func dataSourceConsulCatalogNodes() *schema.Resource {
 
 func dataSourceConsulCatalogNodesRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}

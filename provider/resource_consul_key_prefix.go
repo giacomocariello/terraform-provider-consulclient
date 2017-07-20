@@ -80,7 +80,11 @@ func resourceConsulKeyPrefix() *schema.Resource {
 
 func resourceConsulKeyPrefixCreate(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -142,7 +146,11 @@ func resourceConsulKeyPrefixCreate(d *schema.ResourceData, meta interface{}) err
 
 func resourceConsulKeyPrefixUpdate(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -212,7 +220,11 @@ func resourceConsulKeyPrefixUpdate(d *schema.ResourceData, meta interface{}) err
 
 func resourceConsulKeyPrefixRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -243,7 +255,11 @@ func resourceConsulKeyPrefixRead(d *schema.ResourceData, meta interface{}) error
 
 func resourceConsulKeyPrefixDelete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}

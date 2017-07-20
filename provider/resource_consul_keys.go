@@ -109,7 +109,11 @@ func resourceConsulKeys() *schema.Resource {
 
 func resourceConsulKeysCreate(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -149,7 +153,11 @@ func resourceConsulKeysCreate(d *schema.ResourceData, meta interface{}) error {
 
 func resourceConsulKeysUpdate(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -237,7 +245,11 @@ func resourceConsulKeysUpdate(d *schema.ResourceData, meta interface{}) error {
 
 func resourceConsulKeysRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -300,7 +312,11 @@ func resourceConsulKeysRead(d *schema.ResourceData, meta interface{}) error {
 
 func resourceConsulKeysDelete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}

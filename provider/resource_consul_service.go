@@ -92,7 +92,11 @@ func resourceConsulService() *schema.Resource {
 
 func resourceConsulServiceCreate(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -152,7 +156,11 @@ func resourceConsulServiceCreate(d *schema.ResourceData, meta interface{}) error
 
 func resourceConsulServiceRead(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
@@ -188,7 +196,11 @@ func resourceConsulServiceRead(d *schema.ResourceData, meta interface{}) error {
 
 func resourceConsulServiceDelete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*ProviderConfig)
-	client, err := config.NewClient()
+	resolvedConfig, _, err := config.GetResolvedConfig(d)
+	if err != nil {
+		return err
+	}
+	client, err := resolvedConfig.NewClient()
 	if err != nil {
 		return err
 	}
