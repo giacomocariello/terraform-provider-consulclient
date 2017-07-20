@@ -1,3 +1,7 @@
+
+// Implementation of resourceConsulAgentService is derived from github.com/terraform-providers/terraform-provider-consul.
+// See https://github.com/terraform-providers/terraform-provider-consul/blob/master/LICENSE for original licensing details.
+
 package provider
 
 import (
