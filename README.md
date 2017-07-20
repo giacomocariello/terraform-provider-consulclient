@@ -1,7 +1,7 @@
-# terraform-provider-dockerclient
+# terraform-provider-consulclient
 Docker client provider for Terraform
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/giacomocariello/terraform-provider-dockerclient)](https://goreportcard.com/report/github.com/giacomocariello/terraform-provider-dockerclient) [![Build Status](https://travis-ci.org/giacomocariello/terraform-provider-dockerclient.svg?branch=master)](https://travis-ci.org/giacomocariello/terraform-provider-dockerclient)
+[![Go Report Card](https://goreportcard.com/badge/github.com/giacomocariello/terraform-provider-consulclient)](https://goreportcard.com/report/github.com/giacomocariello/terraform-provider-consulclient) [![Build Status](https://travis-ci.org/giacomocariello/terraform-provider-consulclient.svg?branch=master)](https://travis-ci.org/giacomocariello/terraform-provider-consulclient)
 
 ## Requisites
 
@@ -11,5 +11,5 @@ Docker client provider for Terraform
 
 ## Install
 ```
-$ go get github.com/giacomocariello/terraform-provider-dockerclient
+$ go get github.com/giacomocariello/terraform-provider-consulclient
 ```
