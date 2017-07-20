@@ -1,8 +1,6 @@
 package provider
 
 import (
-	"encoding/json"
-
 	consulapi "github.com/hashicorp/consul/api"
 	"github.com/hashicorp/terraform/helper/schema"
 )
